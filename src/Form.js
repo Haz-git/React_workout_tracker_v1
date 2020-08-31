@@ -46,9 +46,11 @@ class Form extends React.Component {
         e.preventDefault();
 
         if (this.checkEmpty() === false && this.checkNum() === true) {
-            console.log(this.state.exName, this.state.weightNum, this.state.setNum, this.state.repNum);
+            this.props.formEntries(this.state);
+            this.resetForm();
         } else {
             alert('Please fill in all the fields and make sure everything except the exercise name are all digits!');
+            this.resetForm();
         }
     }
 
@@ -87,19 +89,19 @@ class Form extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <div>
                     <label className="ui label">Exercise Name</label>
-                    <input value={this.state.exName} onChange={this.handleExChange}  className="ui input" />
+                    <input value={this.state.exName} onChange={this.handleExChange} className="ui input" />
                 </div>
                 <div>
                     <label className="ui label">Enter the Weight Used</label>
-                    <input value={this.state.weightNum} onChange={this.handleWeightChange}  className="ui input" />
+                    <input value={this.state.weightNum} onChange={this.handleWeightChange} className="ui input" />
                 </div>
                 <div>
                     <label className="ui label">Number of Sets</label>
-                    <input value={this.state.setNum} onChange={this.handleSetChange}  className="ui input" />
+                    <input value={this.state.setNum} onChange={this.handleSetChange} className="ui input" />
                 </div>
                 <div>
                     <label className="ui label">Number of Reps</label>
-                    <input value={this.state.repNum} onChange={this.handleRepChange}  className="ui input" />
+                    <input value={this.state.repNum} onChange={this.handleRepChange} className="ui input" />
                 </div>
 
                 <button type='submit' className="ui primary button">Submit Entry</button>
