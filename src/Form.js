@@ -10,11 +10,50 @@ class Form extends React.Component {
             setNum: '',
             repNum: '',
         }
+
+        this.baseState = this.state;
+    }
+
+    checkEmpty = () => {
+        //Checks if all fields are filled out.
+        let stateArray = Object.values(this.state);
+        let resultsArr = [];
+
+        for (let i = 0; i < stateArray.length; i++) {
+            if (stateArray[i] !== '') {
+                resultsArr.push(stateArray[i]);
+            }
+        }
+
+        if (resultsArr.length === 4) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    checkNum = () => {
+        //Check for Numerical input for weight, sets, and reps.
+
+        let regex = /^[0-9]+$/;
+        let numArray = Object.values(this.state);
+        return (numArray.filter(e => e.match(regex)).length >= 3 ? true : false);
+        
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.exName, this.state.weightNum, this.state.setNum, this.state.repNum);
+
+        if (this.checkEmpty() === false && this.checkNum() === true) {
+            console.log(this.state.exName, this.state.weightNum, this.state.setNum, this.state.repNum);
+        } else {
+            alert('Please fill in all the fields and make sure everything except the exercise name are all digits!');
+        }
+    }
+
+    resetForm = () => {
+        this.setState(this.baseState);
     }
 
     handleExChange = (e) => {
@@ -64,7 +103,7 @@ class Form extends React.Component {
                 </div>
 
                 <button type='submit' className="ui primary button">Submit Entry</button>
-                <button type='reset' className="ui button">Discard</button>
+                <button type='button' onClick={this.resetForm} className="ui button">Discard</button>
             </form>
         )
     }
