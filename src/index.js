@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WorkOutNameInput from './WorkOutNameInput';
-import WeightInput from './WeightInput';
+import Form from './Form';
 
 class App extends React.Component {
     render() {
         return (
             <div>
-                <WorkOutNameInput />
-                <WeightInput />
+                <Form />
             </div>
         );
     }
